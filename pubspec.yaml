@@ -1,0 +1,5 @@
+name: multiAgentSystem
+description: A sample web application
+dependencies:
+  browser: any
+  async: any
