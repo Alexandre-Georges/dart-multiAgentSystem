@@ -4,11 +4,13 @@ class Array2D<Type> {
   
   int _width;
   int _height;
+  List<Type> _list;
   List<Type> _array;
   
   Array2D(int width, int height) {
     this._width = width;
     this._height = height;
+    this._list = new List();
     this._array = new List(width * height);
   }
   
@@ -18,6 +20,7 @@ class Array2D<Type> {
   }
   
   void add(int x, int y, Type object) {
+    this._list.add(object);
     this._array[this.getIndex(x, y)] = object;
   }
   
@@ -35,5 +38,9 @@ class Array2D<Type> {
   
   ArgumentError _createRangeError(String dimensionName, int value, int minValue, int maxValue) {
     return new ArgumentError("Incorrect value for $dimensionName : $value, min value is $minValue and max value is $maxValue");
+  }
+  
+  List<Type> toList() {
+    return this._list;
   }
 }

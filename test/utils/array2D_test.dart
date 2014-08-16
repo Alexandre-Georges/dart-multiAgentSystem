@@ -86,7 +86,6 @@ main() {
     setUp(() {
       array2D = new Array2D<String>(3, 2);
       array2D.add(0, 0, "val 0.0");
-      array2D.add(0, 1, "val 0.1");
       array2D.add(1, 0, "val 1.0");
       array2D.add(1, 1, "val 1.1");
       array2D.add(2, 0, "val 2.0");
@@ -113,17 +112,35 @@ main() {
     
     test("get", () {
       expect(array2D.get(0, 0), new isInstanceOf<String>());
-      expect(array2D.get(0, 1), new isInstanceOf<String>());
+      expect(array2D.get(0, 1), isNull);
       expect(array2D.get(1, 0), new isInstanceOf<String>());
       expect(array2D.get(1, 1), new isInstanceOf<String>());
       expect(array2D.get(2, 0), new isInstanceOf<String>());
       expect(array2D.get(2, 1), new isInstanceOf<String>());
       expect(array2D.get(0, 0), "val 0.0");
-      expect(array2D.get(0, 1), "val 0.1");
       expect(array2D.get(1, 0), "val 1.0");
       expect(array2D.get(1, 1), "val 1.1");
       expect(array2D.get(2, 0), "val 2.0");
       expect(array2D.get(2, 1), "val 2.1");
+    });
+  });
+  
+  group('toList', () {
+    
+    Array2D<String> array2D;
+    
+    setUp(() {
+      array2D = new Array2D<String>(3, 2);
+      array2D.add(0, 0, "val 0.0");
+      array2D.add(1, 0, "val 1.0");
+      array2D.add(1, 1, "val 1.1");
+      array2D.add(2, 0, "val 2.0");
+      array2D.add(2, 1, "val 2.1");
+    });
+    
+    test("toList", () {
+      expect(array2D.toList(), new isInstanceOf<List>());
+      expect(array2D.toList(), [ "val 0.0", "val 1.0", "val 1.1", "val 2.0", "val 2.1"]);
     });
   });
   
