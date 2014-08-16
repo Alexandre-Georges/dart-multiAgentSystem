@@ -1,3 +1,5 @@
+library rendering;
+
 abstract class Renderable {
-  void render(num);
+  void render(CanvasElement, CanvasRenderingContext2D);
 }

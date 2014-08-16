@@ -1,3 +1,5 @@
+library rendering;
+
 import 'dart:html';
 import 'dart:async';
 import 'renderable.dart';
@@ -17,15 +19,19 @@ class Renderer extends Renderable {
   }
   
   void start() {
-    this.render(-1);
+    this.redraw(-1);
   }
   
-  void render(num value) {
+  void render(CanvasElement canvas, CanvasRenderingContext2D context) {
     this._context.beginPath();
-    this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
-    this._renderable.render(this._context);
+    this._context.clearRect(0, 0, canvas.width, canvas.height);
+    this._renderable.render(canvas, context);
     this._context.closePath();
-    window.requestAnimationFrame(render);
+  }
+  
+  void redraw(num _) {
+    this.render(this._canvas, this._context);
+    window.requestAnimationFrame(redraw);
   }
   
 }
@@ -36,7 +42,7 @@ class Test extends Renderable {
   int x = 0;
   int y = 0;
 
-  void render(context) {
+  void render(CanvasElement canvas, CanvasRenderingContext2D context) {
     context.fillRect(x, y, 100, 200);
   }
   
