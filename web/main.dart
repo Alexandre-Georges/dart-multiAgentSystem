@@ -1,10 +1,19 @@
+import 'dart:async';
 import 'rendering/renderer.dart';
-import 'model/model.dart';
+import 'model/implementation/gameOfLife/model.dart';
 
 void main() {
-  Model model = new Model();
+  GameOfLifeModel model = new GameOfLifeModel(4, 3);
   Renderer renderer = new Renderer(model);
   renderer.start();
-//  test.nextIteration();
+  iterate(model);
+}
+
+void iterate(GameOfLifeModel model) {
+  new Timer(new Duration(seconds: 2), () {
+    model.computeNextStep();
+    model.evolve();
+    iterate(model);
+  });
 }
 
