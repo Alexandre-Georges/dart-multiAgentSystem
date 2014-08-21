@@ -5,7 +5,7 @@ import '../rendering/renderable.dart';
 import 'evolvable.dart';
 import 'cell.dart';
 
-class Model implements Renderable, Evolvable {
+abstract class Model implements Renderable, Evolvable {
   
   int width;
   int height;
@@ -43,5 +43,7 @@ class Model implements Renderable, Evolvable {
       cell.evolve();
     });
   }
+  
+  void addListeners(Element element);
   
 }

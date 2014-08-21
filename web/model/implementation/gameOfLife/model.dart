@@ -1,5 +1,6 @@
 library model;
 
+import 'dart:html';
 import 'dart:math';
 import '../../model.dart';
 import 'cell.dart';
@@ -28,5 +29,11 @@ class GameOfLifeModel extends Model {
       return false;
     }
     return true;
+  }
+
+  void addListeners(Element element) {
+    element.addEventListener("click", (MouseEvent mouseEvent){
+      print("click");
+    });
   }
 }

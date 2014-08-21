@@ -12,9 +12,8 @@ class Renderer extends Renderable {
   CanvasRenderingContext2D _context = null;
   Window _window = null;
   
-  Renderer(this._renderable) {
+  Renderer(this._renderable, this._canvas) {
     this._window = window;
-    this._canvas = querySelector('#canvas');
     this._context = this._canvas.getContext('2d');
   }
   
@@ -31,7 +30,7 @@ class Renderer extends Renderable {
   
   void redraw(num _) {
     this.render(this._canvas, this._context);
-    window.requestAnimationFrame(redraw);
+    this._window.requestAnimationFrame(redraw);
   }
   
 }

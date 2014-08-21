@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:html';
 import 'rendering/renderer.dart';
 import 'model/implementation/gameOfLife/model.dart';
 
 void main() {
+  CanvasElement canvasElement = querySelector('#canvas');
   GameOfLifeModel model = new GameOfLifeModel(50, 60);
-  Renderer renderer = new Renderer(model);
+  model.addListeners(canvasElement);
+  Renderer renderer = new Renderer(model, canvasElement);
   renderer.start();
   //iterate(model);
 }
