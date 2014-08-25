@@ -62,4 +62,8 @@ class GameOfLifeCell extends Cell {
     }
     return false;
   }
+  
+  void onClick() {
+    this.isAlive = !this.isAlive;
+  }
 }

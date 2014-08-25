@@ -43,13 +43,18 @@ abstract class Model implements Renderable, Evolvable {
       cell.evolve();
     });
   }
+  
+  Cell getCellAt(int x, int y) {
+    return cells[x * this.height + y];
+  }
 
   void addListeners(Element element) {
     element.addEventListener("click", (MouseEvent mouseEvent){
       Point point = mouseEvent.offset;
       int cellX = point.x ~/ this._unitWidth;
       int cellY = point.y ~/ this._unitHeight;
-      print(cellX.toString() + " " + cellY.toString());
+      
+      this.getCellAt(cellX, cellY).onClick();
     });
   }
   

@@ -23,5 +23,6 @@ abstract class Cell implements Renderable, Evolvable {
   void computeNextStep();
   void evolve();
   Color getColor();
+  void onClick();
   
 }
