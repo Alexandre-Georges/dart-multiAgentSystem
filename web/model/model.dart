@@ -56,6 +56,7 @@ abstract class Model implements Renderable, Evolvable {
   }
   
   Cell getCellAt(int x, int y) {
+    this.checkRange(x, y);
     return cells[x * this.height + y];
   }
 
@@ -64,9 +65,14 @@ abstract class Model implements Renderable, Evolvable {
       Point point = mouseEvent.offset;
       int cellX = point.x ~/ this._unitWidth;
       int cellY = point.y ~/ this._unitHeight;
-      
+      this.checkRange(cellX, cellY);
       this.getCellAt(cellX, cellY).onClick();
     });
   }
   
+  void checkRange(int x, int y) {
+    if (x< 0 || x > (this.width - 1) || y < 0 || y > (this.height - 1)) {
+      throw new ArgumentError("Incorrect indexes x=$x y=$y, width=${this.width} height=${this.height}");
+    }
+  }
 }

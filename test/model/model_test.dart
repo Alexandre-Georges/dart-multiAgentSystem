@@ -41,6 +41,44 @@ main() {
 
   });
   
+  group('Check range', () {
+
+    int width = 2;
+    int height = 3;
+    Model model;
+    
+    setUp(() {
+      model = new ModelImpl(width, height);
+    });
+    
+    test("Does not throw an error", () {
+      expect(() {
+        model.checkRange(0, 0);
+        model.checkRange(0, 1);
+        model.checkRange(0, 2);
+        model.checkRange(1, 0);
+        model.checkRange(1, 1);
+        model.checkRange(1, 2);
+      }, returnsNormally);
+    });
+    
+    test("Throws an error", () {
+      expect(() {
+        model.checkRange(-1, 0);
+      }, throwsArgumentError);
+      expect(() {
+        model.checkRange(0, -1);
+      }, throwsArgumentError);
+      expect(() {
+        model.checkRange(0, 3);
+      }, throwsArgumentError);
+      expect(() {
+        model.checkRange(2, 0);
+      }, throwsArgumentError);
+    });
+
+  });
+  
   group('Is ready', () {
 
     int width = 2;
