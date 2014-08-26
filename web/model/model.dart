@@ -22,6 +22,8 @@ abstract class Model implements Renderable, Evolvable {
     this.cellNumber = 0;
   }
   
+  bool isReady() => this.cellNumber == this.width * this.height;
+  
   void addCell(Cell cell) {
     cell.init(this.cellNumber ~/ this.height, this.cellNumber % this.height, this);
     this.cells.add(cell);
