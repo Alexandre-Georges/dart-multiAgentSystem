@@ -22,18 +22,30 @@ main() {
     
     setUp(() {
       model = new GameOfLifeModel(3, 4);
-      cell1 = new GameOfLifeCell(true, 0, 0, model);
-      cell2 = new GameOfLifeCell(true, 0, 1, model);
-      cell3 = new GameOfLifeCell(true, 0, 2, model);
-      cell4 = new GameOfLifeCell(true, 0, 3, model);
-      cell5 = new GameOfLifeCell(true, 1, 0, model);
-      cell6 = new GameOfLifeCell(true, 1, 1, model);
-      cell7 = new GameOfLifeCell(true, 1, 2, model);
-      cell8 = new GameOfLifeCell(true, 1, 3, model);
-      cell9 = new GameOfLifeCell(true, 2, 0, model);
-      cell10 = new GameOfLifeCell(true, 2, 1, model);
-      cell11 = new GameOfLifeCell(true, 2, 2, model);
-      cell12 = new GameOfLifeCell(true, 2, 3, model);
+      cell1 = new GameOfLifeCell(true);
+      cell1.init(0, 0, model);
+      cell2 = new GameOfLifeCell(true);
+      cell2.init(0, 1, model);
+      cell3 = new GameOfLifeCell(true);
+      cell3.init(0, 2, model);
+      cell4 = new GameOfLifeCell(true);
+      cell4.init(0, 3, model);
+      cell5 = new GameOfLifeCell(true);
+      cell5.init(1, 0, model);
+      cell6 = new GameOfLifeCell(true);
+      cell6.init(1, 1, model);
+      cell7 = new GameOfLifeCell(true);
+      cell7.init(1, 2, model);
+      cell8 = new GameOfLifeCell(true);
+      cell8.init(1, 3, model);
+      cell9 = new GameOfLifeCell(true);
+      cell9.init(2, 0, model);
+      cell10 = new GameOfLifeCell(true);
+      cell10.init(2, 1, model);
+      cell11 = new GameOfLifeCell(true);
+      cell11.init(2, 2, model);
+      cell12 = new GameOfLifeCell(true);
+      cell12.init(2, 3, model);
     });
   
     test("same cell", () {

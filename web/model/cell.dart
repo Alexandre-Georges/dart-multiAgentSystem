@@ -12,7 +12,13 @@ abstract class Cell implements Renderable, Evolvable {
   int y;
   Model model;
   
-  Cell(this.x, this.y, this.model);
+  Cell();
+  
+  void init(int x, int y, Model model) {
+    this.x = x;
+    this.y = y;
+    this.model = model;
+  }
 
   void render(CanvasElement canvas, CanvasRenderingContext2D context) {
     Color color = this.getColor();

@@ -1,7 +1,6 @@
 library cell;
 
 import '../../../utils/color.dart';
-import '../../model.dart';
 import '../../cell.dart';
 
 class GameOfLifeCell extends Cell {
@@ -9,7 +8,7 @@ class GameOfLifeCell extends Cell {
   bool isAlive;
   bool _nextIsAlive;
   
-  GameOfLifeCell(this.isAlive, int x, int y, Model model) : super(x, y, model);
+  GameOfLifeCell(this.isAlive) : super();
   
   Color getColor() {
     if (this.isAlive) {
