@@ -13,15 +13,19 @@ abstract class Model implements Renderable, Evolvable {
   int _unitWidth;
   int _unitHeight;
   
+  int cellNumber;
+  
   List<Cell> cells;
   
   Model(this.width, this.height) {
-    cells = new List();
+    this.cells = new List();
+    this.cellNumber = 0;
   }
   
-  void addCell(Cell cell, int cellNumber) {
-    cell.init(cellNumber ~/ this.height, cellNumber % this.height, this);
+  void addCell(Cell cell) {
+    cell.init(this.cellNumber ~/ this.height, this.cellNumber % this.height, this);
     this.cells.add(cell);
+    this.cellNumber++;
   }
   
   void render(CanvasElement canvas, CanvasRenderingContext2D context) {

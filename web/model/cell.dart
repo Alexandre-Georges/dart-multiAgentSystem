@@ -11,9 +11,7 @@ abstract class Cell implements Renderable, Evolvable {
   int x;
   int y;
   Model model;
-  
-  Cell();
-  
+    
   void init(int x, int y, Model model) {
     this.x = x;
     this.y = y;

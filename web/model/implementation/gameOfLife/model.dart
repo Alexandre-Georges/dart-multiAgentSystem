@@ -15,7 +15,7 @@ class GameOfLifeModel extends Model {
       if (isAlive) {
         aliveNumber--;
       }
-      this.addCell(new GameOfLifeCell(isAlive), cellNumber);
+      this.addCell(new GameOfLifeCell(isAlive));
       cellNumber++;
     }
   }
