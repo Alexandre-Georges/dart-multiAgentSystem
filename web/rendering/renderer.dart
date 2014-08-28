@@ -12,9 +12,13 @@ class Renderer extends Renderable {
   CanvasRenderingContext2D _context = null;
   Window _window = null;
   
-  Renderer(this._renderable, this._canvas) {
+  Renderer(this._canvas) {
     this._window = window;
     this._context = this._canvas.getContext('2d');
+  }
+  
+  void addRenderable(Renderable renderable) {
+    this._renderable = renderable;
   }
   
   void start() {
@@ -24,7 +28,9 @@ class Renderer extends Renderable {
   void render(CanvasElement canvas, CanvasRenderingContext2D context) {
     this._context.beginPath();
     this._context.clearRect(0, 0, canvas.width, canvas.height);
-    this._renderable.render(canvas, context);
+    if (this._renderable != null) {
+      this._renderable.render(canvas, context);
+    }
     this._context.closePath();
   }
   
@@ -33,25 +39,4 @@ class Renderer extends Renderable {
     this._window.requestAnimationFrame(redraw);
   }
   
-}
-
-class Test extends Renderable {
-
-  int iterations = 0;
-  int x = 0;
-  int y = 0;
-
-  void render(CanvasElement canvas, CanvasRenderingContext2D context) {
-    context.fillRect(x, y, 100, 200);
-  }
-  
-  void nextIteration() {
-    iterations++;
-    x +=1;
-    y +=1;
-    
-    if (iterations < 100) {
-      new Future.delayed(new Duration(milliseconds: 10), nextIteration);
-    }
-  }
 }

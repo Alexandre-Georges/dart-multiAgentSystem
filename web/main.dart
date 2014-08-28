@@ -7,9 +7,18 @@ import 'model/implementation/gameOfLife/model.dart';
 bool started = false;
 Model model = null;
 
+CanvasElement canvasElement = querySelector('#canvas');
+ButtonInputElement start = querySelector('#startButton');
+ButtonInputElement setDimensions = querySelector('#setDimensionsButton');
+NumberInputElement width = querySelector('#width');
+NumberInputElement height = querySelector('#height');
+
+Renderer renderer = new Renderer(canvasElement);
+
 void main() {
   
-  ButtonInputElement start = querySelector('#startButton');
+  renderer.start();
+  
   start.addEventListener("click", (MouseEvent mouseEvent){
     started = !started;
     if (started) {
@@ -18,21 +27,20 @@ void main() {
     start.value = started ? 'Stop' : 'Start';
   });
   
-  CanvasElement canvasElement = querySelector('#canvas');
-  model = new GameOfLifeModel(50, 60);
-  model.addListeners(canvasElement);
-  Renderer renderer = new Renderer(model, canvasElement);
-  renderer.start();
-  //iterate(model);
+  setDimensions.addEventListener("click", (MouseEvent mouseEvent){
+    model = new GameOfLifeModel(width.valueAsNumber.toInt(), height.valueAsNumber.toInt());
+    model.addListeners(canvasElement);
+    renderer.addRenderable(model);
+  });
 }
 
 void iterate(GameOfLifeModel model) {
-  if (started) {
-    model.computeNextStep();
-    model.evolve();
-    new Timer(new Duration(milliseconds: 2000), () {
-        iterate(model);
-    });
-  }
+  new Timer(new Duration(milliseconds: 100), () {
+    if (started) {
+      model.computeNextStep();
+      model.evolve();
+      iterate(model);
+    }
+  });
 }
 
