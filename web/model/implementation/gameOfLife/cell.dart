@@ -1,4 +1,4 @@
-library cell;
+library gameOfLifeCell;
 
 import '../../../utils/color.dart';
 import '../../cell.dart';

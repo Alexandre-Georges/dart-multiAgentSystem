@@ -1,4 +1,4 @@
-library model;
+library gameOfLifeModel;
 
 import 'dart:math';
 import '../../model.dart';
@@ -6,7 +6,7 @@ import 'cell.dart';
 
 class GameOfLifeModel extends Model {
   GameOfLifeModel(int width, int height) : super(width, height) {
-    int aliveNumber = 20;
+    int aliveNumber = 300;
     
     int cellNumber = 0;
     int totalCells = width * height;
