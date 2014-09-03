@@ -24,6 +24,14 @@ abstract class Cell implements Renderable, Evolvable {
     context.fillRect(this.x * this.model.unitWidth, this.y * this.model.unitHeight, this.model.unitWidth, this.model.unitHeight);
   }
   
+  Cell getCellAt(int deltaX, deltaY) {
+    
+    int cellX = (this.x + deltaX + this.model.width) % this.model.width;
+    int cellY = (this.y + deltaY + this.model.height) % this.model.height;
+    //print("x=$x y=$y deltaX=$deltaX deltaY=$deltaY cellX=$cellX cellY=$cellY");
+    return this.model.getCellAt(cellX, cellY);
+  }
+  
   void computeNextStep();
   void evolve();
   Color getColor();

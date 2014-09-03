@@ -4,6 +4,8 @@ import '../../../utils/color.dart';
 import '../../cell.dart';
 
 class GameOfLifeCell extends Cell {
+
+  static List<int> NEIGHBOUR_INDEXES = [-1, 0, 1];
   
   bool isAlive;
   bool _nextIsAlive;
@@ -20,14 +22,18 @@ class GameOfLifeCell extends Cell {
   void computeNextStep() {
     int aliveNumber = 0;
     int deadNumber = 0;
-    this.model.cells.forEach((GameOfLifeCell cell) {
-      if (this.isNeighbour(cell)) {
-        if (cell.isAlive) {
-          aliveNumber++;
-        } else {
-          deadNumber++;
+    
+    NEIGHBOUR_INDEXES.forEach((xIndex) {
+      NEIGHBOUR_INDEXES.forEach((yIndex) {
+        if (xIndex != 0 || yIndex != 0) {
+          GameOfLifeCell neighbour = this.getCellAt(xIndex, yIndex);
+          if (neighbour.isAlive) {
+            aliveNumber++;
+          } else {
+            deadNumber++;
+          }
         }
-      }
+      });
     });
     
     if (this.isAlive && (aliveNumber < 2 || aliveNumber > 3)) {
@@ -41,25 +47,6 @@ class GameOfLifeCell extends Cell {
   
   void evolve() {
     this.isAlive = this._nextIsAlive;
-  }
-  
-  bool isNeighbour(Cell cell) {
-    if (this == cell) {
-      return false;
-    }
-    
-    int diffNegX = (this.x - cell.x + this.model.width) % this.model.width;
-    int diffPosX = (cell.x - this.x + this.model.width) % this.model.width;
-    int diffX = diffNegX < diffPosX ? -diffNegX : diffPosX;
-
-    int diffNegY = (this.y - cell.y + this.model.height) % this.model.height;
-    int diffPosY = (cell.y - this.y + this.model.height) % this.model.height;
-    int diffY = diffNegY < diffPosY ? -diffNegY : diffPosY;
-    
-    if (diffX <= 1 && diffX >= -1 && diffY <= 1 && diffY >= -1) {
-      return true;
-    }
-    return false;
   }
   
   void onClick() {

@@ -25,7 +25,7 @@ abstract class Model implements Renderable, Evolvable {
   bool isReady() => this.cellNumber == this.width * this.height;
   
   void addCell(Cell cell) {
-    cell.init(this.cellNumber ~/ this.height, this.cellNumber % this.height, this);
+    cell.init(this.cellNumber % this.width, this.cellNumber ~/ this.width, this);
     this.cells.add(cell);
     this.cellNumber++;
   }
@@ -57,7 +57,7 @@ abstract class Model implements Renderable, Evolvable {
   
   Cell getCellAt(int x, int y) {
     this.checkRange(x, y);
-    return cells[x * this.height + y];
+    return cells[x + this.width * y];
   }
 
   void addListeners(Element element) {
@@ -71,7 +71,7 @@ abstract class Model implements Renderable, Evolvable {
   }
   
   void checkRange(int x, int y) {
-    if (x< 0 || x > (this.width - 1) || y < 0 || y > (this.height - 1)) {
+    if (x < 0 || x > (this.width - 1) || y < 0 || y > (this.height - 1)) {
       throw new ArgumentError("Incorrect indexes x=$x y=$y, width=${this.width} height=${this.height}");
     }
   }
