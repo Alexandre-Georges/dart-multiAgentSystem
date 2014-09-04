@@ -8,16 +8,14 @@ bool started = false;
 Model model = null;
 
 CanvasElement canvasElement = querySelector('#canvas');
+CanvasRenderingContext2D context = canvasElement.getContext('2d');
+
 ButtonInputElement start = querySelector('#startButton');
 ButtonInputElement setDimensions = querySelector('#setDimensionsButton');
 NumberInputElement width = querySelector('#width');
 NumberInputElement height = querySelector('#height');
 
-Renderer renderer = new Renderer(canvasElement);
-
 void main() {
-  
-  renderer.start();
   
   start.addEventListener("click", (MouseEvent mouseEvent){
     started = !started;
@@ -29,13 +27,13 @@ void main() {
   
   setDimensions.addEventListener("click", (MouseEvent mouseEvent){
     model = new GameOfLifeModel(width.valueAsNumber.toInt(), height.valueAsNumber.toInt());
+    model.addRenderer(new Renderer(canvasElement, context));
     model.addListeners(canvasElement);
-    renderer.addRenderable(model);
   });
 }
 
 void iterate(GameOfLifeModel model) {
-  new Timer(new Duration(milliseconds: 100), () {
+  new Timer(new Duration(milliseconds: 500), () {
     if (started) {
       model.computeNextStep();
       model.evolve();

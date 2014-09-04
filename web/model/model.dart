@@ -2,6 +2,7 @@ library model;
 
 import 'dart:html';
 import '../rendering/renderable.dart';
+import '../rendering/renderer.dart';
 import 'evolvable.dart';
 import 'cell.dart';
 
@@ -17,9 +18,16 @@ abstract class Model implements Renderable, Evolvable {
   
   List<Cell> cells;
   
+  Renderer _renderer;
+  
   Model(this.width, this.height) {
     this.cells = new List();
     this.cellNumber = 0;
+  }
+  
+  void addRenderer(Renderer renderer) {
+    this._renderer = renderer;
+    this._renderer.draw(this);
   }
   
   bool isReady() => this.cellNumber == this.width * this.height;
@@ -53,6 +61,7 @@ abstract class Model implements Renderable, Evolvable {
     cells.toList().forEach((Cell cell) {
       cell.evolve();
     });
+    this._renderer.draw(this);
   }
   
   Cell getCellAt(int x, int y) {
